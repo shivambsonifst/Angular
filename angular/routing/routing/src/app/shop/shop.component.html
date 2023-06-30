@@ -1,0 +1,12 @@
+<h2>shop works!</h2>
+<h4>Parent to child</h4>
+<button class = "btn btn-primary mx-1 btn-sm my-2" (click)="increment()">Increment</button>
+<button class = "btn btn-primary mx-1 btn-sm my-2" (click)="decrement()">decrement</button>
+<h4>Child to parent</h4>
+<ul>
+    <li *ngFor="let item of items">{{item}}</li>
+  </ul>
+
+
+<app-cart [count]="Counter" (newItemEvent)="addItem($event)"></app-cart>
+

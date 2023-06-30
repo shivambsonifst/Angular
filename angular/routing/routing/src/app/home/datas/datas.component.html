@@ -1,0 +1,36 @@
+<div class="container my-4">
+    <!-- Component to View -->
+    <label my-5>{{view}}</label>
+
+    <!-- View to component -->
+    <button class="btn btn-primary btn-sm mx-2" (click)="myFunc()">view to component</button>
+    <br><br>
+
+    <!-- Two way data binding  -->
+    <label class="h5 mx-2">Enter Datas (using ngModal)</label>
+    <input type="text" [(ngModel)]='val' />
+    <button class="btn btn-primary btn-sm mx-2" (click)="submit()">Submit</button>
+    <h6 class=" my-2 mx-2">{{print}}</h6>
+</div>
+
+
+<!-- Piping -->
+<div class="container">
+
+    <h4>(Piping)Today's Date is:- {{today | date:format}} </h4>
+    <button class="btn btn-primary" type="button" (click)="toggleFormat()">Change Format</button>
+</div>
+
+<div class="container my-5">
+    <h4>Decimal Pipe</h4>
+    <b>{{ 454.78787814 | number: '3.4-4' }}</b> 
+
+    <div class="container">
+        <h4>Json Pipe</h4>
+        <b>{{ jsonval | json }}</b>
+        <h4>Percent Pipe</h4>
+        <b>{{00.54565 | percent}}</b>
+        <h4>Slice Pipe</h4>
+        <b>{{months | slice:2:6}}</b>
+    </div>
+</div>

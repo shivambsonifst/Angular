@@ -1,0 +1,128 @@
+<div class="row justify-content-center">
+    <div class="col-5  ">
+        <div class="container my-3" style="padding:15px;border: 1px solid grey;">
+            <form [formGroup]="reactiveForm">
+                <h3 class="text-center my-2">Add Product Details</h3>
+                <div class="form-group mt-2">
+                    <label class="fw-bold" for="inputAddress">Product ID</label>
+                    <input type="number" class="form-control " name="productId" id="productId"
+                        placeholder="Enter Product ID" formControlName="productId" [readOnly]="productIdRead" required>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('productId')?.invalid && (reactiveForm.get('productId')?.dirty || reactiveForm.get('productId')?.touched)">Product
+                        ID is required. </span>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('productId')?.errors?.['uniqueId'] && reactiveFormInput.invalid"> This
+                        ID
+                        already exists </span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label class="fw-bold" for="inputAddress">Part Number</label>
+                    <input type="number" class="form-control " id="partNumber" placeholder="Enter Part Number"
+                        formControlName="partNumber" [readOnly]="partNumberRead" required>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('partNumber')?.invalid && (reactiveForm.get('partNumber')?.dirty || reactiveForm.get('partNumber')?.touched)">Part
+                        Number is required & it Should be more than 2 digits. </span>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('partNumber')?.errors?.['uniquePartNumber'] && reactiveFormInput.invalid">
+                        This Part Number already exists</span>
+                </div>
+
+                <div class="form-group mt-2">
+                    <label class="fw-bold" for="inputAddress">Name</label>
+                    <input type="text" class="form-control " id="productName" placeholder="Enter Product Name"
+                        formControlName="productName" required>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('productName')?.invalid && (reactiveForm.get('productName')?.dirty || reactiveForm.get('productName')?.touched)">Product
+                        Name is required & it Should be more than 3 characters</span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="fw-bold" style="margin-right: 20px;" for="inputAddress">Size </label>
+                    <input class="form-check-input mx-1" type="radio" value="10" id="radio1" formControlName="size"
+                        required> 10
+                    <input class="form-check-input mx-1" type="radio" value="20" id="radio2" formControlName="size"
+                        required> 20
+                    <input class="form-check-input mx-1" type="radio" value="30" id="radio3" formControlName="size"
+                        required> 30
+                    <input class="form-check-input mx-1" type="radio" value="40" id="radio4" formControlName="size"
+                        required> 40
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('size')?.invalid && (reactiveForm.get('size')?.dirty || reactiveForm.get('size')?.touched)">Size
+                        is required, select any one value.</span>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label class="fw-bold" style="margin-right: 20px;" for="inputAddress">Colors</label>
+                    <div class="mt-1 mx-5" *ngFor="let data of Data; let i=index">
+                        <label>
+                            <input type="checkbox" [value]="data.value" [checked]="data.checked"
+                                (change)="onCheckboxChange($event)" required>
+                            {{data.name}}
+                        </label>
+                    </div>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('colors')?.invalid && (reactiveForm.get('colors')?.dirty || reactiveForm.get('colors')?.touched)">
+                        Checkbox is required, select atleast one value.
+                    </span>
+
+                </div>
+
+                <div class="form-group mt-2">
+                    <label class="fw-bold" for="inputAddress">Description</label>
+                    <input type="text" class="form-control " id="description" placeholder="Enter Description"
+                        formControlName="description" required>
+                    <span class="text-danger"
+                        *ngIf="reactiveForm.get('description')?.invalid && (reactiveForm.get('description')?.dirty || reactiveForm.get('description')?.touched)">Description
+                        is required & it Should be more than 5 characters</span>
+                </div>
+
+                <div class="form-group ">
+                    <button class="btn btn-dark mt-2 mx-1" [disabled]="reactiveForm.invalid || addButtonValue "
+                        (click)="onSubmit(reactiveForm)">Add</button>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <div class="col-6">
+        <!-- SHowing Table here -->
+        <div class="container my-3 " style="padding:15px;border: 1px solid grey;">
+
+            <form [formGroup]="reactiveFormInput">
+                <div class="form-group ">
+                    <input type="text" class="form-control my-2 " name="productId" id="productId"
+                        placeholder="Enter Product ID or Product Name" formControlName="inputValue" required>
+                    <span class="text-danger"
+                        *ngIf="reactiveFormInput.get('inputValue')?.invalid && (reactiveFormInput.get('inputValue')?.dirty || reactiveFormInput.get('inputValue')?.touched)">Please
+                        Enter Product ID or Product Name</span>
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-success mt-2 mx-2" [disabled]="reactiveFormInput.invalid"
+                        (click)="modifyButton()">Modify</button>
+                    <button class="btn btn-primary mt-2 mx-1" [disabled]="saveButtonState"
+                        (click)="saveButton(reactiveForm , reactiveFormInput)">Save</button>
+                    <button class="btn btn-danger  mt-2 mx-2" [disabled]="reactiveFormInput.invalid"
+                        (click)="deleteButton(reactiveFormInput)">Delete</button>
+                    <button class="btn btn-success  mt-2 mx-2" [disabled]="reactiveFormInput.invalid"
+                        (click)="searchButton(reactiveFormInput)">Search</button>
+                    <button class="btn btn-info  mt-2 mx-2" (click)="showAllDatas()">Show All Datas</button>
+
+                </div>
+                <div class="form-group text-center">
+                    <button class="btn btn-info  mt-2 mx-2" (click)="sortByPartNumber()">Sort By Part Number</button>
+                    <button class="btn btn-info  mt-2 mx-2" (click)="sortByName()">Sort By Name</button>
+
+                </div>
+            </form>
+
+        </div>
+        <div class="container my-3 ">
+            <app-table [products]="products" [searchTable]="searchTable"></app-table>
+        </div>
+
+    </div>
+
+</div>

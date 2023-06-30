@@ -1,0 +1,10 @@
+<h3 mb-0>Cart Works!</h3>
+<h4>Child components</h4>
+<h4>Parent to child Output:- </h4>
+<h6>Number of items added in card is {{count}}</h6>
+
+
+<h4 class = my-6>Child  to parent </h4>
+<label for="item-input">Add an item (Event Emitter) :</label>
+<input type="text" id="item-input" #newItem>
+<button class="mb-4"  type="button" (click)="addNewItem(newItem.value)">Add to parent's list</button>

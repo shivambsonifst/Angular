@@ -1,0 +1,9 @@
+<h2>Welcome To Home</h2>
+
+<!-- Piping -->
+<h3>(Piping) Today's Date is:-  {{today | date:"MM/dd/yy"}} </h3>
+
+
+
+ <!-- parent to child eventEmitter -->
+<app-datas [events]="eventsSubject.asObservable()"></app-datas>

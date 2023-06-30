@@ -1,0 +1,51 @@
+<div class="container my-3">
+
+  <form [formGroup]="reactiveForm" (ngSubmit)="onSubmit(reactiveForm)">
+    <h3 style="margin-left:12%;">Reactive Form</h3>
+    <div class="form-group mt-2">
+      <label for="inputAddress">Name</label>
+      <input type="text" class="form-control w-50" id="inputName" placeholder="Enter Your Name" formControlName="name"
+        required>
+      <span class="text-danger"
+        *ngIf="reactiveForm.get('name')?.invalid && (reactiveForm.get('name')?.dirty || reactiveForm.get('name')?.touched)">Name
+        is required</span>
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="inputAddress">Age</label>
+      <input type="number" class="form-control w-50" id="inputAge" placeholder="Enter Your Age" formControlName="age"
+        required>
+      <span class="text-danger"
+        *ngIf="reactiveForm.get('age')?.invalid && (reactiveForm.get('age')?.dirty || reactiveForm.get('age')?.touched)">Age
+        is required</span>
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="inputAddress">Phone Number</label>
+      <input type="number" class="form-control w-50" id="inputPhoneNumber" placeholder="Enter Your Phone Number"
+        formControlName="phoneNumber" required>
+      <span class="text-danger"
+        *ngIf="reactiveForm.get('phoneNumber')?.invalid && (reactiveForm.get('phoneNumber')?.dirty || reactiveForm.get('phoneNumber')?.touched)">Phone
+        Phone number is required</span>
+    </div>
+
+    <div class="form-group mt-2">
+      <label for="inputAddress">Address</label>
+      <input type="text" class="form-control w-50" id="inputAddress" placeholder="Enter Your Address"
+        formControlName="address" required>
+      <span class="text-danger"
+        *ngIf="reactiveForm.get('address')?.invalid && (reactiveForm.get('address')?.dirty || reactiveForm.get('address')?.touched)">Address
+        is required</span>
+    </div>
+
+    <div class="form-group ">
+      <button class="btn btn-dark mt-2" [disabled]="reactiveForm.invalid">Submit</button>
+    </div>
+ 
+    </form>
+
+</div>
+
+<div class="container my-5">
+  <app-reactiveformtable [formTable]="formTable"></app-reactiveformtable>
+</div>

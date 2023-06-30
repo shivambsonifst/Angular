@@ -1,0 +1,23 @@
+<h2>Welcome To About</h2>
+
+<h4> Locaion module </h4>
+<!-- location Module -->
+<button class="btn btn-primary btn-sm mx-2 my-2"  (click)="getPath()" > Get Path</button>
+<button class="btn btn-primary btn-sm mx-2 my-2"  (click)="goBack()" >  &lt; Go Back</button>
+<button class="btn btn-primary btn-sm mx-2 my-2"  (click)="goForward()"  > Go Forward &gt; </button>
+
+<!-- Access data from Route URL (Route Params) -->
+<h6 class="mt-5">Access data from Route URL (Route Params)</h6>
+<ul>
+    
+    <li><a [routerLink]="['/about/name']" [queryParams]= "{name: 'shivam'}" routerLinkActive="active">Name</a></li>
+    <li><a [routerLink]="['/about/address']" [queryParams]= "{address: 'gandhinagar'}" routerLinkActive="active">Address</a></li>
+    <li><a [routerLink]="['/about/email']" [queryParams]= "{email: 'shivam@gmail.com'}" routerLinkActive="active">Email</a></li>
+</ul>
+
+<!-- path location output -->
+<h5 class="mx-5">{{pathName}}</h5>
+
+
+<router-outlet></router-outlet>
+

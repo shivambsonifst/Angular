@@ -1,0 +1,88 @@
+<form [formGroup]="reactiveForm" (ngSubmit)="onSubmit(reactiveForm)">
+
+<div class="form-group mt-3">
+<label class="fw-bold" style="margin-right: 20px;" for="inputAddress">Colors</label>
+<div class="mt-1 mx-5" ngFor="let checkbox of checkboxData">
+<label>
+<input type="checkbox" [value]="checkbox.value" [checked]="checkbox.checked" (change)="onCheckboxChange($event)"> {{checkbox.name}}
+</label>
+</div>
+<!-- <span class="text-danger"
+ngIf="reactiveForm.get('colors')?.invalid && (reactiveForm.get('colors')?.dirty || reactiveForm.get('colors')?.touched)">
+Checkbox is required, select atleast one value.
+</span> -->
+
+</div>
+<button (click)="checkSelectedColors()">Modify</button>
+<button (click)="checkSelectedColors1()">Reset</button>
+
+
+-------------------------------------------------------
+
+
+import { Component , OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray, FormControl } from '@angular/forms';
+@Component({
+selector: 'app-root',
+templateUrl: './app.component.html',
+styleUrls: ['./app.component.css']
+})
+export class AppComponent implements OnInit {
+title = 'checkbox';
+reactiveForm!: FormGroup;
+// selectedColors = ['Red', 'Yellow'];
+onSubmit(form: FormGroup) {
+}
+checkboxData = [
+{ name: 'Red', value: 'Red', checked: false },
+{ name: 'Blue', value: 'Blue', checked: false },
+{ name: 'Black', value: 'Black', checked: false },
+{ name: 'Yellow', value: 'Yellow', checked: false }
+];
+ngOnInit(){
+this.reactiveForm = new FormGroup({
+colors: new FormArray([]),
+});
+}
+checkSelectedColors() {
+this.checkboxData.forEach(checkbox => {
+if (this.reactiveForm.value.colors.includes(checkbox.value)) {
+checkbox.checked = true;
+}
+});
+}
+checkSelectedColors1() {
+console.log("this.reactiveForm.value.colors" , this.reactiveForm.value.colors )
+this.checkboxData.forEach(checkbox => {
+this.reactiveForm.value.colors.forEach((values:any): void => {
+console.log("values" ,values )
+console.log("values.value" ,values.value )
+console.log("checkbox.value" ,checkbox.value )
+if (values.value.includes(checkbox.value)) {
+console.log("inside if")
+checkbox.checked = false;
+}
+}
+)})
+
+}
+/ Getting Datas from checkbox /
+onCheckboxChange(e: any) {
+const colors: FormArray = this.reactiveForm.get('colors') as FormArray;
+console.log(e.target.checked)
+if (e.target.checked) {
+console.log(e.target.value , e.target.checked);
+colors.push(new FormControl({value:e.target.value ,checked: e.target.checked}));
+console.log(colors.value);
+}
+if (!e.target.checked) {
+let i: number = 0;
+colors.controls.forEach((item: any) => {
+if (item.value === e.target.value) {
+colors.removeAt(i);
+return;
+}
+i++;
+});
+}
+}}

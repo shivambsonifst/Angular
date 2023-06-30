@@ -1,0 +1,15 @@
+<h2>products works!</h2>
+
+<div appProductsDirective>
+
+
+
+    <h5 class="mx-2 my-2">Directive example here:- </h5>
+    <p class="mx-2 my-2" appProductsDirective [title]="title">{{title}}</p>
+    <p class="mx-2" appProductsDirective [list]="list" *ngFor="let values of list; index as i">{{"Id: "+list[i].id +" "+
+        "name: "+list[i].name+" " + "age : "+list[i].age}}</p>
+
+
+    <h5 class="my-4 ">{{"This message is printed using:- " + message}}</h5>
+
+</div>

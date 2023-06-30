@@ -1,0 +1,12 @@
+import { FormControl, Validators } from '@angular/forms';
+
+// ...
+
+id = new FormControl(null, [Validators.required, Validators.pattern(/^\d+$/), Validators.min(1)]);
+partNo = new FormControl(null, [Validators.required, Validators.pattern(/^\d+$/), Validators.min(1)]);
+name = new FormControl(null, [Validators.required, Validators.minLength(3), Validators.maxLength(50)]);
+size = new FormControl(null, [Validators.required]);
+color = new FormControl(null, [Validators.required]);
+description = new FormControl(null, [Validators.required, Validators.minLength(10), Validators.maxLength(500)]);
+
+// ...
